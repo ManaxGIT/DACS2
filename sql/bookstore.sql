@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2023 at 03:57 PM
+-- Generation Time: Jan 01, 2024 at 04:15 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -29,15 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `name` varchar(20) NOT NULL,
-  `pass` varchar(40) NOT NULL
+  `pass` varchar(40) NOT NULL,
+  `state` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`name`, `pass`) VALUES
-('admin', 'admin');
+INSERT INTO `admin` (`name`, `pass`, `state`) VALUES
+('admin', 'admin', -1),
+('pub102', '102102', 1);
 
 -- --------------------------------------------------------
 
@@ -93,8 +95,8 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`customerid`, `name`, `address`, `city`, `zip_code`, `country`) VALUES
 (1, 'a', 'a', 'a', 'a', 'a'),
 (2, 'b', 'b', 'b', 'b', 'b'),
-(3, 'test', '123 test', '12121', 'test', 'test'),
-(4, 'a', 'b', 'c', 'd', 'e');
+(4, 'a', 'b', 'c', 'd', 'e'),
+(5, 'a', 'b', 'c', 'd', 'Vietnam');
 
 -- --------------------------------------------------------
 
@@ -121,9 +123,15 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`orderid`, `customerid`, `amount`, `date`, `ship_name`, `ship_address`, `ship_city`, `ship_zip_code`, `ship_country`) VALUES
 (1, 1, 60.00, '2015-12-03 13:30:12', 'a', 'a', 'a', 'a', 'a'),
 (2, 2, 60.00, '2015-12-03 13:31:12', 'b', 'b', 'b', 'b', 'b'),
-(3, 3, 20.00, '2015-12-03 19:34:21', 'test', '123 test', '12121', 'test', 'test'),
 (4, 1, 20.00, '2015-12-04 10:19:14', 'a', 'a', 'a', 'a', 'a'),
-(5, 4, 40.00, '2023-12-11 05:38:45', 'a', 'b', 'c', 'd', 'e');
+(5, 4, 40.00, '2023-12-11 05:38:45', 'a', 'b', 'c', 'd', 'e'),
+(6, 4, 100.00, '2023-12-14 02:09:06', 'a', 'b', 'c', 'd', 'e'),
+(7, 5, 40.00, '2023-12-14 05:39:58', 'a', 'b', 'c', 'd', 'Vietnam'),
+(8, 5, 20.00, '2023-12-14 05:43:53', 'a', 'b', 'c', 'd', 'Vietnam'),
+(9, 5, 20.00, '2023-12-14 06:35:57', 'a', 'b', 'c', 'd', 'Vietnam'),
+(10, 5, 20.00, '2024-01-01 06:55:30', 'a', 'b', 'c', 'd', 'Vietnam'),
+(13, 5, 20.00, '2024-01-01 08:34:53', 'a', 'b', 'c', 'd', 'Vietnam'),
+(14, 5, 20.00, '2024-01-01 08:36:21', 'a', 'b', 'c', 'd', 'Vietnam');
 
 -- --------------------------------------------------------
 
@@ -151,7 +159,19 @@ INSERT INTO `order_items` (`orderid`, `book_isbn`, `item_price`, `quantity`) VAL
 (2, '978-1-49192-706-9', 20.00, 1),
 (3, '978-0-321-94786-4', 20.00, 1),
 (1, '978-1-49192-706-9', 20.00, 1),
-(5, '978-0-7303-1484-4', 20.00, 2);
+(5, '978-0-7303-1484-4', 20.00, 2),
+(5, '978-0-7303-1484-4', 20.00, 2),
+(5, '978-1-4571-0402-2', 20.00, 1),
+(5, '978-1-484216-40-8', 20.00, 1),
+(5, '978-1-484217-26-9', 20.00, 1),
+(7, '978-1-4571-0402-2', 20.00, 2),
+(7, '978-0-7303-1484-4', 20.00, 1),
+(7, '978-0-7303-1484-4', 20.00, 1),
+(7, '978-0-321-94786-4', 20.00, 1),
+(11, '978-0-321-94786-4', 20.00, 1),
+(7, '978-0-321-94786-4', 20.00, 1),
+(7, '978-0-321-94786-4', 20.00, 1),
+(7, '978-0-321-94786-4', 20.00, 1);
 
 -- --------------------------------------------------------
 
@@ -218,19 +238,19 @@ ALTER TABLE `publisher`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customerid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `customerid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `orderid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `publisher`
 --
 ALTER TABLE `publisher`
-  MODIFY `publisherid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `publisherid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

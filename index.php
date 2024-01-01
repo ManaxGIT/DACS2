@@ -7,7 +7,7 @@
   require_once "./template/header.php";
   require_once "./functions/database_functions.php";
   $conn = db_connect();
-  $row = select4LatestBook($conn);
+  $row = select4Book($conn);
 ?>
       <div class="jumbotron">
         <div class="container">
@@ -17,7 +17,7 @@
         </div>
       </div>
       <!-- Example row of columns -->
-      <p class="lead text-center text-muted">Latest books</p>
+      <p class="lead text-center text-muted">Noticeable books</p>
       <div class="row">
         <?php foreach($row as $book) { ?>
       	<div class="col-md-3">

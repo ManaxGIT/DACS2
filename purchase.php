@@ -86,10 +86,10 @@
               	<input type="text" class="form-control" name="card_number">
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" hidden>
             <label for="card_PID" class="col-lg-2 control-label">PID</label>
             <div class="col-lg-10">
-              	<input type="text" class="form-control" name="card_PID">
+              	<input type="text" class="form-control" name="card_PID" value="123">   
             </div>
         </div>
         <div class="form-group">

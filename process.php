@@ -25,7 +25,7 @@
 
 	// validate post section
 	$card_number = $_POST['card_number'];
-	$card_PID = $_POST['card_PID'];
+	// $card_PID = $_POST['card_PID'];
 	$card_expire = strtotime($_POST['card_expire']);
 	$card_owner = $_POST['card_owner'];
 
