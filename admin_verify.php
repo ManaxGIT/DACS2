@@ -17,10 +17,10 @@
 
 	$name = mysqli_real_escape_string($conn, $name);
 	$pass = mysqli_real_escape_string($conn, $pass);
-	$pass = sha1($pass);
 
 	// get from db
-	$query = "SELECT name, pass from admin";
+	$query = "SELECT state FROM admin WHERE name = '$name' AND pass = '$pass'";
+	echo $query;
 	$result = mysqli_query($conn, $query);
 	if(!$result){
 		echo "Empty data " . mysqli_error($conn);
@@ -28,13 +28,13 @@
 	}
 	$row = mysqli_fetch_assoc($result);
 
-	if($name != $row['name'] && $pass != $row['pass']){
-		echo "Name or pass is wrong. Check again!";
-		$_SESSION['admin'] = false;
-		exit;
+	if($row['state'] == null) {
+		header("Location: admin.php");
+	} else {
+		$_SESSION['admin'] = $row['state'];
+		echo $_SESSION['admin'];
+		header("Location: admin_book.php");
 	}
 
 	if(isset($conn)) {mysqli_close($conn);}
-	$_SESSION['admin'] = true;
-	header("Location: admin_book.php");
 ?>

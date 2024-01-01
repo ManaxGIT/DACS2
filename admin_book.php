@@ -5,7 +5,11 @@
 	require_once "./template/header.php";
 	require_once "./functions/database_functions.php";
 	$conn = db_connect();
-	$result = getAll($conn);
+
+	
+
+
+	$result = getAll($conn, $_SESSION['admin']);
 ?>
 	<p class="lead"><a href="admin_add.php">Add new book</a></p>
 	<a href="admin_signout.php" class="btn btn-primary">Sign out!</a>

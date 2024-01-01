@@ -127,8 +127,12 @@
 		return $result;
 	}
 
-	function getAll($conn){
-		$query = "SELECT * from books ORDER BY book_isbn DESC";
+	function getAll($conn, $pubID){
+		$query = "SELECT * from books";
+		if($pubID != -1) {
+			$query .= " HAVING publisherid = $pubID";
+		}
+		$query .= " ORDER BY book_isbn DESC";
 		$result = mysqli_query($conn, $query);
 		if(!$result){
 			echo "Can't retrieve data " . mysqli_error($conn);
@@ -137,11 +141,20 @@
 		return $result;
 	}
 
-	function debug_to_console($data) {
-		$output = $data;
-		if (is_array($output))
-			$output = implode(',', $output);
-	
-		echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+	function getBookSold($conn, $pubID) {
+		$query = "SELECT b.book_title, COUNT(b.book_isbn) AS sold, b.publisherid
+				  FROM books b 
+				  LEFT JOIN order_items o ON b.book_isbn = o.book_isbn
+				  GROUP BY b.book_isbn";
+		if($pubID != -1) {
+			$query .= "HAVING b.publisherid = $pubID";
+		}
+		$result = mysqli_query($conn, $query);
+		if(!$result){
+			echo "Can't retrieve data " . mysqli_error($conn);
+			exit;
+		}
+		return $result;
 	}
+
 ?>

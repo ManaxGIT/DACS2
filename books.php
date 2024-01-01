@@ -1,7 +1,7 @@
 <?php
   session_start();
   $count = 0;
-  // connecto database
+  // connect to database
   require_once "./functions/database_functions.php";
   $conn = db_connect();
 

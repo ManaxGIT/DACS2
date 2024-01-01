@@ -6,6 +6,12 @@
 	require "./functions/database_functions.php";
 	$conn = db_connect();
 
+	if($_SESSION['admin'] > 0) {
+		$pubName = getPubName($conn,$_SESSION['admin']);
+	} else {
+		$pubName = null;
+	}
+
 	if(isset($_POST['add'])){
 		$isbn = trim($_POST['isbn']);
 		$isbn = mysqli_real_escape_string($conn, $isbn);
@@ -46,7 +52,7 @@
 				echo "Can't add new publisher " . mysqli_error($conn);
 				exit;
 			}
-			$publisherid = mysql_insert_id($conn);
+			$publisherid = mysqli_insert_id($conn);
 		} else {
 			$row = mysqli_fetch_assoc($findResult);
 			$publisherid = $row['publisherid'];
@@ -91,11 +97,10 @@
 			</tr>
 			<tr>
 				<th>Publisher</th>
-				<td><input type="text" name="publisher" required></td>
+				<td><input type="text" name="publisher" <?php if($pubName != null) {echo "value=\"$pubName\" readonly";}?> required></td>
 			</tr>
 		</table>
 		<input type="submit" name="add" value="Add new book" class="btn btn-primary">
-		<input type="reset" value="cancel" class="btn btn-default">
 	</form>
 	<br/>
 <?php
